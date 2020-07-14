@@ -1,4 +1,4 @@
-# Stack implementation In Java
+# Stack implementation In Java (Swing)
 
 ## Description
 
