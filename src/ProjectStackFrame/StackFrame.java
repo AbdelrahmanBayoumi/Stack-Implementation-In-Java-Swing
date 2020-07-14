@@ -6,21 +6,22 @@ import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class StackFrame extends javax.swing.JFrame {
+
     private final JFileChooser openFileChooser;
-    
-    
+
     static Stack<Integer> st = new Stack<>();
     OpenStack L = new OpenStack();
-    LoadeStack L1 = new LoadeStack();
+    LoadStack L1 = new LoadStack();
+
     /**
      * Creates new form StackFrame
      */
     public StackFrame() {
-        super("Stack Project");        
+        super("Stack Project");
         initComponents();
         openFileChooser = new JFileChooser();
         openFileChooser.setCurrentDirectory(new File("D:\\"));
-        openFileChooser.setFileFilter(new FileNameExtensionFilter("txt Text","txt"));
+        openFileChooser.setFileFilter(new FileNameExtensionFilter("txt Text", "txt"));
     }
 
     /**
@@ -304,48 +305,49 @@ public class StackFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void SortButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SortButtonActionPerformed
-        if(st.isEmpty()){LabelErorrSort.setText("No elements to sort !!");}
-        printSorted.setText("Sorted Stack : "+st.sortAscending(st));
+        if (st.isEmpty()) {
+            LabelErorrSort.setText("No elements to sort !!");
+        }
+        printSorted.setText("Sorted Stack : " + st.sortAscending(st));
     }//GEN-LAST:event_SortButtonActionPerformed
 
     private void PeekButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PeekButtonActionPerformed
-        if(st.isEmpty())
-        { LableErorrpeek.setText("Empty Stack Can't Peek !!"); }
-        else {
-            String data = ""+st.peek();
+        if (st.isEmpty()) {
+            LableErorrpeek.setText("Empty Stack Can't Peek !!");
+        } else {
+            String data = "" + st.peek();
             PeekData.setText(data);
             LableErorrpeek.setText("peek is done");
         }
     }//GEN-LAST:event_PeekButtonActionPerformed
 
     private void PopButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PopButtonActionPerformed
-        if(st.isEmpty())
-        { LableErorrpop.setText("Empty Stack Can't Pop !!"); }
-        else {
+        if (st.isEmpty()) {
+            LableErorrpop.setText("Empty Stack Can't Pop !!");
+        } else {
             st.pop();
             LableErorrpop.setText("pop is done");
-            LabelSize.setText("Size is = "+st.getsize());
-            LabelStackis.setText("Stack is : "+st.toString()); }
+            LabelSize.setText("Size is = " + st.getsize());
+            LabelStackis.setText("Stack is : " + st.toString());
+        }
     }//GEN-LAST:event_PopButtonActionPerformed
 
     private void PushButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PushButtonActionPerformed
-        int item=0;
-        try{
+        int item = 0;
+        try {
             item = Integer.parseInt(PushField.getText());
             st.push(item);
             PushField.setText("");
-        if (st.peek()==item) {
-            LableErorrpush.setText("Pushed");
-        }
-        }
-        catch (NumberFormatException e){
+            if (st.peek() == item) {
+                LableErorrpush.setText("Pushed");
+            }
+        } catch (NumberFormatException e) {
             LableErorrpush.setText("Must Be Integer!");
             PushField.setText("");
         }
-        
 
-        LabelSize.setText("Size is = "+st.getsize());
-        LabelStackis.setText("Stack is : "+st.toString());
+        LabelSize.setText("Size is = " + st.getsize());
+        LabelStackis.setText("Stack is : " + st.toString());
         PushField.setText("");
     }//GEN-LAST:event_PushButtonActionPerformed
 
@@ -354,39 +356,39 @@ public class StackFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_PushFieldActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-      String path =  LoadField.getText();
-      try{LoadeStack.load(path);
-          LoadLabel.setText("File opened successfully");
-      st=LoadeStack.load(path);
-      LabelStackis.setText("Stack Is : "+st.toString());
-       LabelSize.setText("Size is = "+st.getsize());
-      LoadField.setText("");
-      }
-      catch(Exception e){
-          LoadLabel.setText("Try agian , Error whith path");
-          LoadField.setText("");}
+        String path = LoadField.getText();
+        try {
+            LoadStack.load(path);
+            LoadLabel.setText("File opened successfully");
+            st = LoadStack.load(path);
+            LabelStackis.setText("Stack Is : " + st.toString());
+            LabelSize.setText("Size is = " + st.getsize());
+            LoadField.setText("");
+        } catch (Exception e) {
+            LoadLabel.setText("Try agian , Error whith path");
+            LoadField.setText("");
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void LoadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoadButtonActionPerformed
         int returnValue = openFileChooser.showOpenDialog(this);
-        if (returnValue == JFileChooser.APPROVE_OPTION){
+        if (returnValue == JFileChooser.APPROVE_OPTION) {
 
-            String path =  LoadField.getText();
-            try{
+            String path = LoadField.getText();
+            try {
                 File selectedFile = openFileChooser.getSelectedFile();
                 OpenStack.load(selectedFile);
                 LoadLabel.setText("File opened successfully");
-                st=OpenStack.load(selectedFile);
-                LabelStackis.setText("Stack Is : "+st.toString());
-                LabelSize.setText("Size is = "+st.getsize());
+                st = OpenStack.load(selectedFile);
+                LabelStackis.setText("Stack Is : " + st.toString());
+                LabelSize.setText("Size is = " + st.getsize());
+                LoadField.setText("");
+            } catch (Exception e) {
+                LoadLabel.setText("Try agian , Error whith path");
                 LoadField.setText("");
             }
-            catch(Exception e){
-                LoadLabel.setText("Try agian , Error whith path");
-                LoadField.setText("");}
 
-        }
-        else {
+        } else {
             LoadLabel.setText("Try agian , File Not Choosen");
         }
 
@@ -397,43 +399,44 @@ public class StackFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_LoadFieldActionPerformed
 
     private void LoadFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_LoadFieldKeyPressed
-        if (evt.getKeyCode()== KeyEvent.VK_ENTER){
-         
-             String path =  LoadField.getText();
-      try{LoadeStack.load(path);
-          LoadLabel.setText("File opened successfully");
-      st=LoadeStack.load(path);
-      LabelStackis.setText("Stack Is : "+st.toString());
-       LabelSize.setText("Size is = "+st.getsize());
-      LoadField.setText("");
-      }
-      catch(Exception e){
-          LoadLabel.setText("Try agian , Error whith path");
-          LoadField.setText("");}
-            
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+
+            String path = LoadField.getText();
+            try {
+                LoadStack.load(path);
+                LoadLabel.setText("File opened successfully");
+                st = LoadStack.load(path);
+                LabelStackis.setText("Stack Is : " + st.toString());
+                LabelSize.setText("Size is = " + st.getsize());
+                LoadField.setText("");
+            } catch (Exception e) {
+                LoadLabel.setText("Try agian , Error whith path");
+                LoadField.setText("");
+            }
+
         }
     }//GEN-LAST:event_LoadFieldKeyPressed
 
     private void PushFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_PushFieldKeyPressed
-        if (evt.getKeyCode()== KeyEvent.VK_ENTER){
-            
-                    int item=0;
-        try{
-            item = Integer.parseInt(PushField.getText());
-            st.push(item);
-            PushField.setText("");}
-        catch (NumberFormatException e){
-            LableErorrpush.setText("Must Be Integer!");
-            PushField.setText("");
-        }
-        if (st.peek()==item) {
-            LableErorrpush.setText("Pushed");
-        }
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
 
-        LabelSize.setText("Size is = "+st.getsize());
-        LabelStackis.setText("Stack is : "+st.toString());
-        PushField.setText("");
-        
+            int item = 0;
+            try {
+                item = Integer.parseInt(PushField.getText());
+                st.push(item);
+                PushField.setText("");
+            } catch (NumberFormatException e) {
+                LableErorrpush.setText("Must Be Integer!");
+                PushField.setText("");
+            }
+            if (st.peek() == item) {
+                LableErorrpush.setText("Pushed");
+            }
+
+            LabelSize.setText("Size is = " + st.getsize());
+            LabelStackis.setText("Stack is : " + st.toString());
+            PushField.setText("");
+
         }
     }//GEN-LAST:event_PushFieldKeyPressed
 
@@ -464,7 +467,6 @@ public class StackFrame extends javax.swing.JFrame {
         }
         //</editor-fold>
 
-        
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
