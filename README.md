@@ -1,7 +1,5 @@
 # Stack implementation In Java (Swing)
 
-## Description
-
 Stack is a data structure used to store a collection of objects. Individual items can be added and stored in a stack using a push operation. Objects can be retrieved using a pop operation, which removes an item from top of the stack, applying the rule LIFO (last in first out).
 
 
